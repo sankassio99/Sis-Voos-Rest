@@ -28,18 +28,17 @@ public class VoosDAO {
     public Voos buscaVoo(String origem, String destino){;
         
         Voos voo = new Voos();
+        CidadeDAO cDAO = new CidadeDAO() ;
         Cidade cidade = new Cidade();
         try{
             PreparedStatement ps = connection.prepareStatement("select * from voos where origem=? and destino=?");
             ps.setString(1, origem);
             ps.setString(2, destino);
             ResultSet rs =  ps.executeQuery() ;
-            if(rs.next()){
+            while(rs.next()){
                 voo.setId(rs.getInt("id"));
-                cidade.setNome(rs.getString("origem"));
-                voo.setOrigem(cidade);
-                cidade.setNome(rs.getString("destino"));
-                voo.setDestino(cidade);
+                voo.setOrigem(cDAO.buscaCidade(rs.getString("origem")));
+                voo.setDestino(cDAO.buscaCidade(rs.getString("destino")));
             }    
         }catch(SQLException e){
             e.printStackTrace();

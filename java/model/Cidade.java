@@ -12,7 +12,7 @@ package model;
 public class Cidade {
     private int id ;
     private String nome ;
-    private String estado ;
+    private int estado ;
 
     public int getId() {
         return id;
@@ -30,11 +30,11 @@ public class Cidade {
         this.nome = nome;
     }
 
-    public String getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
     

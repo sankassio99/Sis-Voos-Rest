@@ -31,7 +31,7 @@ public class VoosResource {
         Gson gson = new Gson();
         String[] words = origemDestino.split("-");
         //separa a origem do destino para fazer a busca no banco de dados 
-        
+//        System.out.println(words[0]+words[1]);
         VoosDAO dao = new VoosDAO();
         voo = dao.buscaVoo(words[0], words[1]);
         
