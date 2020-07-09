@@ -5,7 +5,9 @@
  */
 package org.netbeans.rest.application.config;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.Set;
+import javax.enterprise.inject.spi.InjectionPoint;
 import javax.ws.rs.core.Application;
 
 /**
@@ -21,7 +23,6 @@ public class ApplicationConfig extends Application {
         addRestResourceClasses(resources);
         return resources;
     }
-
     /**
      * Do not modify addRestResourceClasses() method.
      * It is automatically populated with
@@ -29,7 +30,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(services.VoosResource.class);
+        resources.add(org.netbeans.rest.application.config.VoosResource.class);
     }
     
 }

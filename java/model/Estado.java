@@ -10,21 +10,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  *
  * @author kassi
  */
 @Entity
-public class Cidade implements Serializable {
+public class Estado implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id ;
-    private String nome ;
-    
-    @ManyToOne
-    private Estado estado ;
+    private String nome;
+    private String uf ;
 
     public int getId() {
         return id;
@@ -42,14 +39,13 @@ public class Cidade implements Serializable {
         this.nome = nome;
     }
 
-    public Estado getEstado() {
-        return estado;
+    public String getUf() {
+        return uf;
     }
 
-    public void setEstado(Estado estado) {
-        this.estado = estado;
+    public void setUf(String uf) {
+        this.uf = uf;
     }
-
     
     
     

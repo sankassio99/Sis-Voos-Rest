@@ -9,34 +9,43 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
  * @author kassi
  */
 public class ConnectionFactory {
-    private static Connection connection = null;
-
-    public static Connection getConnection() {
-        if (connection != null)
-            return connection;
-        else {
-            try {
-                Properties prop = new Properties();
-                
-                String user = "root";
-                String password = "";
-                Class.forName("com.mysql.jdbc.Driver"); // Para quem for usar MySql
-//                Class.forName("org.postgresql.Driver");// Para quem for usar Postgres
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sisvoos", user, password);// Para quem for usar MySql
-//                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/userdb",user, password);// Para quem for usar Postgres
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return connection;
-        }
-
+    
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("meuPU");
+    
+    public EntityManager getConnection(){
+        return emf.createEntityManager();
     }
+//    private static Connection connection = null;
+//
+//    public static Connection getConnection() {
+//        if (connection != null)
+//            return connection;
+//        else {
+//            try {
+//                Properties prop = new Properties();
+//                
+//                String user = "root";
+//                String password = "";
+//                Class.forName("com.mysql.jdbc.Driver"); // Para quem for usar MySql
+////                Class.forName("org.postgresql.Driver");// Para quem for usar Postgres
+//                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/sisvoos", user, password);// Para quem for usar MySql
+////                connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/userdb",user, password);// Para quem for usar Postgres
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//            return connection;
+//        }
+//
+//    }
 }
