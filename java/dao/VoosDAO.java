@@ -37,12 +37,38 @@ public class VoosDAO {
         EntityManager em = new ConnectionFactory().getConnection();
         ArrayList <Voos> voos = null ;
         System.out.println("Origem: "+origem+" detino: "+destino);
-//        CidadeDAO cDAO = new CidadeDAO();;
-//        int idOrigem = cDAO.findByName(origem);
-//        int idDestino = cDAO.findByName(destino);
-//        System.out.println("Dados buscado da tabela cidade: ");
         try{
             voos = (ArrayList<Voos>) em.createQuery("from Voos where destino_id="+destino+" and origem_id="+origem).getResultList();
+        }catch(Exception e){
+            System.err.println(e);
+        }finally{
+            em.close();
+        }
+        
+        return voos ;  
+    }
+    public ArrayList<Voos> findByTrajetoData(String origem, String destino, String data){
+        EntityManager em = new ConnectionFactory().getConnection();
+        ArrayList <Voos> voos = null ;
+        System.out.println("Origem: "+origem+" detino: "+destino+" data: "+data);
+        try{
+            voos = (ArrayList<Voos>) em.createQuery("from Voos where destino_id="+destino+" and origem_id="+origem+" and data_partida='"+data+"'").getResultList();
+        }catch(Exception e){
+            System.err.println(e);
+        }finally{
+            em.close();
+        }
+        
+        return voos ;  
+    }
+    
+    public ArrayList<Voos> findByTrajetoDataPreco(String origem, String destino, String data, double min, double max){
+        EntityManager em = new ConnectionFactory().getConnection();
+        ArrayList <Voos> voos = null ;
+        System.out.println("Origem: "+origem+" detino: "+destino+" data: "+data+" precoMin: "+min+ "PrecoMax: "+max);
+        try{
+            voos = (ArrayList<Voos>) em.createQuery("from Voos where destino_id="+destino+
+                    " and origem_id="+origem+" and data_partida='"+data+"' and preco BETWEEN "+min+" and "+max).getResultList();
         }catch(Exception e){
             System.err.println(e);
         }finally{
