@@ -26,47 +26,38 @@ import model.Voos;
 @Path("/voos")
 public class VoosResource {
     Voos voo = new Voos();
+    VoosDAO dao = new VoosDAO();
     
     //BUSCA PELA ORIGEM E DESTINO
     @GET
-    @Path("{origemDestino}")//Palmas-SaoPaulo
+    @Path("{origem}/{destino}")// 977/3035
     @Produces(MediaType.APPLICATION_JSON)
-    public String getVoo(@PathParam("origemDestino")String origemDestino){
-        Gson gson = new Gson();
-        String[] words = origemDestino.split("-");
-        //separa a origem do destino para fazer a busca no banco de dados 
-        VoosDAO dao = new VoosDAO();
-        return gson.toJson(dao.findByTrajeto(words[0], words[1]));
+    public ArrayList<Voos> getVoo(@PathParam("origem")String origem, @PathParam("destino")String destino){
+        
+        return dao.findByTrajeto(origem, destino);
+        
     }
     
+    //ORIGEM, DESTINO E DATA DE PARTIDA
     @GET
-    @Path("{origemDestino}/{dataPartida}")//Palmas-SaoPaulo
+    @Path("{origem}/{destino}/{dataPartida}")//Palmas-SaoPaulo
     @Produces(MediaType.APPLICATION_JSON)
-    public String getVoo1(@PathParam("origemDestino")String origemDestino,@PathParam("dataPartida")String dataPartida){
-        Gson gson = new Gson();
-        String[] words = origemDestino.split("-");
-        //separa a origem do destino para fazer a busca no banco de dados 
-        VoosDAO dao = new VoosDAO();
-        List<Voos> voos = dao.findByTrajetoData(words[0], words[1],dataPartida);
+    public ArrayList<Voos> getVoo1(@PathParam("origem")String origem, @PathParam("destino")String destino,
+            @PathParam("dataPartida")String dataPartida){ 
         
-        return gson.toJson(voos);
+        return dao.findByTrajetoData(origem, destino,dataPartida);
+            
     }
     
+    //ORIGEM, DESTINO, DATA DE PARTIDA E FAIXA DE PREÇO
     @GET
-    @Path("{origemDestino}/{dataPartida}/{faixaPreco}")//Palmas-SaoPaulo
+    @Path("{origem}/{destino}/{dataPartida}/{precoMin}/{precoMax}")//Palmas-SaoPaulo
     @Produces(MediaType.APPLICATION_JSON)
-    public String getVoo2(@PathParam("origemDestino")String origemDestino,@PathParam("dataPartida")String dataPartida,@PathParam("faixaPreco")String faixaPreco){
-        Gson gson = new Gson();
-        String[] words = origemDestino.split("-");
-        String[] preco = faixaPreco.split("-");
-        double precoMin = Double.parseDouble(preco[0]);
-        double precoMax = Double.parseDouble(preco[1]);
-        //separa a origem do destino para fazer a busca no banco de dados 
-        VoosDAO dao = new VoosDAO();
-        List<Voos> voos = dao.findByTrajetoDataPreco(words[0], words[1],dataPartida,precoMin,precoMax);
+    public ArrayList<Voos> getVoo2(@PathParam("origem")String origem, @PathParam("destino")String destino,
+            @PathParam("dataPartida")String dataPartida,@PathParam("precoMin")double precoMin,@PathParam("precoMax")double precoMax){
         
-        return gson.toJson(voos);
-    }
+        return dao.findByTrajetoDataPreco(origem, destino,dataPartida,precoMin,precoMax);
+    };
 
     
     //BUSCA PELO ID. APENAS PARA TESTE
