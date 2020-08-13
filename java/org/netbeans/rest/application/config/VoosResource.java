@@ -6,27 +6,35 @@
 package org.netbeans.rest.application.config;
 
 import com.google.gson.Gson;
+import dao.ReservasDAO;
 import dao.VoosDAO;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import static javax.ws.rs.HttpMethod.POST;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import model.Reservas;
 import model.Voos;
 
 /**
  *
- * @author kassi
+ * @author kassio
  */
 @Path("/voos")
 public class VoosResource {
     Voos voo = new Voos();
     VoosDAO dao = new VoosDAO();
+    ReservasDAO rDao = new ReservasDAO();
     
     //BUSCA PELA ORIGEM E DESTINO
     @GET
@@ -58,7 +66,41 @@ public class VoosResource {
         
         return dao.findByTrajetoDataPreco(origem, destino,dataPartida,precoMin,precoMax);
     };
-
+    
+    //RESERVAR VOO 
+    @POST
+    @Path("/reserva")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public int reserve(Reservas reserva){
+        return rDao.save(reserva);
+    };
+    
+    
+    //Buscar reserva pelo ID
+    @GET
+    @Path("reserva/{id}")//
+    @Produces(MediaType.APPLICATION_JSON)
+    public Reservas getReserve(@PathParam("id")Integer id){
+        
+        return rDao.findById(id);
+    };
+    
+    //Alterar reserva do Voo
+    @PUT
+    @Path("/reserva")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public int reserveUpdate(Reservas reserva){
+        return rDao.save(reserva);
+    };
+    
+    //Deletando reserva do Voo
+    @DELETE
+    @Path("/reserva/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Reservas reserveDelete(@PathParam("id")Integer id ){
+        return rDao.remove(id);
+    };
+    
     
     //BUSCA PELO ID. APENAS PARA TESTE
 //    @GET
