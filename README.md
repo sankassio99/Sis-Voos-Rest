@@ -13,11 +13,11 @@ Ex: `` http://localhost:8080/Sis-Voos-Rest/api/voos/3032/977/2020-07-10 ``
 3. consultar voos por origem, destino, data de partida e faixa de preço
 // Projeto-rest/consulta/id_origem/id_destino/yy-mm-dd/precoMin/precoMax <br>
 Ex: ``http://localhost:8080/Sis-Voos-Rest/api/voos/3032/977/2020-07-10/590.0/600.0``
-4. cadastrar reserva do voo
+4. cadastrar reserva do voo<br>
 Ex: ``http://localhost:8080/Sis-Voos-Rest/api/voos/reserva``
-5. alterar reserva do voo
+5. alterar reserva do voo<br>
 Ex: ``http://localhost:8080/Sis-Voos-Rest/api/voos/reserva``
-6. excluir reserva do voo
+6. excluir reserva do voo<br>
 Ex: ``http://localhost:8080/Sis-Voos-Rest/api/voos/reserva/idDaReserva``
 
 
