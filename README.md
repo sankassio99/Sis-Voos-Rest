@@ -14,11 +14,11 @@ Ex: `` http://localhost:8080/Sis-Voos-Rest/api/voos/3032/977/2020-07-10 ``
 // Projeto-rest/consulta/id_origem/id_destino/yy-mm-dd/precoMin/precoMax <br>
 Ex: ``http://localhost:8080/Sis-Voos-Rest/api/voos/3032/977/2020-07-10/590.0/600.0``
 4. cadastrar reserva do voo
-// Projeto-rest/cadastrar/codVoo
+Ex: ``http://localhost:8080/Sis-Voos-Rest/api/voos/reserva``
 5. alterar reserva do voo
-// Projeto-rest/alterar/codVoo
+Ex: ``http://localhost:8080/Sis-Voos-Rest/api/voos/reserva``
 6. excluir reserva do voo
-// Projeto-rest/delete/codVoo
+Ex: ``http://localhost:8080/Sis-Voos-Rest/api/voos/reserva/idDaReserva``
 
 
 ### Exemplo de Retorno
